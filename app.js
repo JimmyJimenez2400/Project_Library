@@ -1,5 +1,9 @@
+//MODEL
+
 // Store book objects in an array
-const myLibrary = [];
+const myLibrary = [
+  { title: 'Horse', author: 'Jimmy', pages: 22, isRead: false, id: 1 },
+];
 
 // Build the Constructor for Book
 function Book(title, author, pages, isRead) {
@@ -11,7 +15,7 @@ function Book(title, author, pages, isRead) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.read = isRead;
+  this.isRead = isRead;
   this.id = crypto.randomUUID();
 }
 
@@ -24,22 +28,61 @@ function addBookToLibrary(bookInstance) {
   myLibrary.push(bookInstance);
 }
 
-const starterData = [
-  { title: 'The Hobbit', author: 'J.R.R. Tolkien', pages: 295, read: false },
-  { title: '1984', author: 'George Orwell', pages: 328, read: true },
-  {
-    title: 'The Great Gatsby',
-    author: 'F. Scott Fitzgerald',
-    pages: 180,
-    read: false,
-  },
-];
+// VIEW
 
-function populateLibrary() {
-  starterData.forEach((data) => {
-    let newBook = new Book(data.title, data.author, data.pages, data.read);
+function createBookCard(book) {
+  const card = document.createElement('div');
+  card.classList.add('cardContainer');
+
+  card.innerHTML = `
+  
+    <div class="leftSide">
+      <h1>${book.title}</h1>
+      <p>${book.author}</p>
+      <p>${book.pages}</p>
+    </div>
+    <div class="rightSide">
+      <button class="isReadOrNot">Status</button>
+      <button class="deleteButton">Delete</button>
+      <button class="expand">Expand</button>
+    </div>
+  `;
+
+  return card;
+}
+
+// CONTROLLER
+function init() {
+  const collectContainer = document.querySelector('.container');
+  const addButton = document.querySelector('.addButton');
+
+  console.log(addButton);
+
+  addButton.addEventListener('click', () => {
+    const newBook = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false);
+
     addBookToLibrary(newBook);
+  });
+  container.appendChild();
+}
+
+function checkLibrary() {
+  myLibrary.forEach((item) => {
+    const collectionContainer = document.querySelector('#BookContainer');
+    collectionContainer.innerHTML = ``;
+
+    collectionContainer.appendChild(createBookCard(item));
   });
 }
 
-populateLibrary();
+
+function start(){
+  checkLibrary();
+  const addButton = document.querySelector('.addButton');
+
+  addButton.addEventListener('click', ()=>{
+    
+  })
+}
+
+// When it comes to adding to the library and displaying it.
