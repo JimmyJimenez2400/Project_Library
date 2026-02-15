@@ -1,41 +1,32 @@
-# Project_Library
+# 📚 Personal Library Manager
 
-A lightweight, interactive web application for tracking your personal book collection. Built as part of the JavaScript course to practice object-oriented principles, DOM manipulation, and event handling.
+I built this project to get hands-on with JavaScript’s Object-Oriented side. It’s a clean, simple way to track what I’m reading and what I’ve already finished, all managed through a dynamic UI.
 
-## 🚀 Features
+## 🚀 What it does
 
-- **Dynamic Library Management**: Add books with titles, authors, and page progress.
-- **Unique Identification**: Every book is assigned a unique `UUID` using the `crypto.randomUUID()` API for stable data tracking.
-- **Smart Sorting**:
-  - **Currently Reading**: Books currently in progress.
-  - **Collection**: Completed books.
-- **Interactive Controls**:
-  - **Toggle Status**: Instantly move books between "Reading" and "Collection" (uses Prototype methods).
-  - **Delete**: Remove books from the library with a single click.
-- **Modern UI**: Uses the HTML5 `<dialog>` element for modal-based form entry
+- **Manage your books**: Add new titles, authors, and track your current page progress.
+- **Smart Organization**: Books automatically sort themselves into "Currently Reading" or "Collection" (Finished) based on their status.
+- **Unique IDs**: Every book gets a unique `UUID` (via `crypto.randomUUID()`), so there’s no confusion when deleting or updating specific cards.
+- **Toggle & Delete**: Move a book between lists or remove it entirely with a single click.
+- **Clean Forms**: Used the native HTML5 `<dialog>` element for a smooth, modal-style entry form.
 
-## 🛠️ Technical Implementation
+## 🛠️ How I built it
 
-### The Model (Data)
+### The Logic (The "Model")
+Everything starts with a **Book constructor**. Instead of attaching functions to every single book instance, I used **Prototypes** for the `toggleStatus` logic—it's more memory-efficient and keeps the code cleaner.
 
-Books are created using a constructor function and stored in a central `myLibrary` array.
+### The UI (The "View")
+The interface stays in sync with the data using a **render function**.
+- **Event Delegation**: Instead of adding a listener to every button, I put one listener on the main container. It catches clicks from "bubbling" events, which is much better for performance.
+- **Data Attributes**: I used `data-book-id` tags to bridge the gap between my HTML elements and my JavaScript objects.
 
-- **Prototypes**: The `toggleStatus` logic is defined on the `Book.prototype` for memory efficiency.
-- **Data Casting**: Form inputs are cast to `Number()` to ensure correct pagination tracking.
-
-### The View (UI)
-
-The application uses a **render function** that clears and rebuilds the DOM sub-containers whenever the library array changes.
-
-- **Data Attributes**: DOM elements are linked to JS objects via `data-book-id` attributes, allowing for precise manipulation.
-- **Event Delegation**: A single event listener on the parent `#BookContainer` handles all interactions for dynamically created cards.
 
 ### 🔧 Installation
 
 1. Clone the repository:
 
    ```bash
-   git clone [https://github.com/your-username/library-app.git](https://github.com/your-username/library-app.git)
+   git clone https://github.com/[yourname]/Project_Library.git
 
    ```
 
