@@ -25,6 +25,46 @@
       <main id="main">
         <section class="addBookContainer">
           <button class="addButton">+ Add New Book</button>
+          <dialog id="bookDialog">
+            <form id="bookForm">
+              <div class="bookInformation">
+                <label for="book_name">Book Name: *</label>
+                <input
+                  type="text"
+                  id="book_name"
+                  placeholder="To Kill a Mocking Bird"
+                  name="book_name"
+                  required
+                />
+                <label for="book_author">Author Name: *</label>
+                <input
+                  type="text"
+                  id="book_author"
+                  name="book_author"
+                  placeholder="Jimmy J"
+                  required
+                />
+              </div>
+              <fieldset>
+                <label for="current_page">Current Page:</label>
+                <input type="number" id="current_page" name="current_page" />
+                <label for="total_pages">Total Pages:</label>
+                <input type="number" id="total_pages" name="total_pages" />
+              </fieldset>
+              <div class="checkboxGroup">
+                <input
+                  type="checkbox"
+                  id="currently_reading_state"
+                  name="isRead"
+                />
+                <label for="currently_reading_state">Currently Reading?</label>
+              </div>
+              <div class="form-actions">
+                <button id="cancel">Cancel</button>
+                <button type="submit" id="submit">Submit</button>
+              </div>
+            </form>
+          </dialog>
         </section>
         <section id="BookContainer">
           <section class="currentlyReading"></section>
