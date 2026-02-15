@@ -41,4 +41,4 @@ The application uses a **render function** that clears and rebuilds the DOM sub-
 
 2. Open index.html in your browser.
 
-Created by Jimmy Jimenez February 2026
+## Created by Jimmy Jimenez February 2026
