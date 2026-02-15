@@ -14,13 +14,6 @@
           <img src="" alt="Icon" />
           <h1>My Library</h1>
         </div>
-        <div class="sectionRight">
-          <img src="" alt="modeIcon" />
-          <label class="switch">
-            <input type="checkbox" />
-            <span class="slider round"></span>
-          </label>
-        </div>
       </header>
       <main id="main">
         <section class="addBookContainer">
@@ -60,15 +53,21 @@
                 <label for="currently_reading_state">Currently Reading?</label>
               </div>
               <div class="form-actions">
-                <button id="cancel">Cancel</button>
+                <button type="button" id="cancel">Cancel</button>
                 <button type="submit" id="submit">Submit</button>
               </div>
             </form>
           </dialog>
         </section>
         <section id="BookContainer">
-          <section class="currentlyReading"></section>
-          <section class="collection"></section>
+          <section class="currentlyReading">
+            <h3>Currently Reading:</h3>
+            <div id="readingList"></div>
+          </section>
+          <section class="collection">
+            <h3>Collection:</h3>
+            <div id="collectionList"></div>
+          </section>
         </section>
       </main>
       <footer id="footer">
