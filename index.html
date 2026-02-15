@@ -4,8 +4,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library</title>
-    <script src="./app.js"></script>
-    <link rel="stylesheet" href="./style.css">
+    <script src="./app.js" defer></script>
+    <link rel="stylesheet" href="./style.css" />
   </head>
-  <body></body>
+  <body>
+    <div id="container">
+      <header id="header">
+        <div class="sectionLeft">
+          <img src="" alt="Icon" />
+          <h1>My Library</h1>
+        </div>
+        <div class="sectionRight">
+          <img src="" alt="modeIcon" />
+          <label class="switch">
+            <input type="checkbox" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </header>
+      <main id="main">
+        <section class="addBookContainer">
+          <button class="addButton">+ Add New Book</button>
+        </section>
+        <section id="BookContainer">
+          <section class="currentlyReading"></section>
+          <section class="collection"></section>
+        </section>
+      </main>
+      <footer id="footer">
+        <h3>Made by Jimmy Jimenez</h3>
+        <p>Date: February 13, 2026</p>
+      </footer>
+    </div>
+  </body>
 </html>
