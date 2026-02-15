@@ -12,14 +12,14 @@ function Book(title, author, currentPage, totalPages, isRead) {
 
   this.title = title;
   this.author = author;
-  this.currentPage = currentPage;
-  this.totalPages = totalPages;
+  this.currentPage = Number(currentPage);
+  this.totalPages = Number(totalPages);
   this.isRead = isRead;
   this.id = crypto.randomUUID();
 }
 
-Book.prototype.sayInfo = function () {
-  return `The ${this.title} by ${this.author}, ${this.pages} pages, ${this.isRead}`;
+Book.prototype.toggleStatus = function () {
+  this.isRead = !this.isRead;
 };
 
 function addBookToLibrary(bookInstance) {
@@ -42,22 +42,27 @@ function createBookCard(book) {
       <p>${book.totalPages}</p>
     </div>
     <div class="rightSide">
-      <button class="isReadOrNot">Status</button>
+      <button class="isReadOrNot" data-book-id="${book.id}">Status:${book.isRead ? 'Currently Reading...' : 'FINISHED'}</button>
       <button class="deleteButton" data-book-id="${book.id}">Delete</button>
-      <button class="expand">Expand</button>
     </div>
   `;
-
   return card;
 }
 
 function renderLibrary() {
-  const collectionContainer = document.querySelector('#BookContainer');
-  collectionContainer.innerHTML = ``;
+  const readingList = document.querySelector('#readingList');
+  const collectionList = document.querySelector('#collectionList');
+
+  readingList.innerHTML = '';
+  collectionList.innerHTML = '';
 
   myLibrary.forEach((item) => {
-    console.log(item);
-    collectionContainer.appendChild(createBookCard(item));
+    const card = createBookCard(item);
+    if (item.isRead) {
+      readingList.appendChild(card);
+    } else {
+      collectionList.appendChild(card);
+    }
   });
 }
 
@@ -67,9 +72,15 @@ function start() {
   const addButton = document.querySelector('.addButton');
   const dialog = document.querySelector('#bookDialog');
   const bookForm = document.querySelector('#bookForm');
+  const cancelButton = document.querySelector('#cancel');
+  const collectionContainer = document.querySelector('#BookContainer');
 
   addButton.addEventListener('click', () => {
     dialog.showModal();
+  });
+
+  cancelButton.addEventListener('click', () => {
+    dialog.close();
   });
 
   bookForm.addEventListener('submit', (e) => {
@@ -90,12 +101,47 @@ function start() {
     );
 
     addBookToLibrary(newBook);
-    console.log('ADDED NEW BOOK');
     renderLibrary();
 
     bookForm.reset();
     dialog.close();
   });
+
+  collectionContainer.addEventListener('click', (e) => {
+    let id = e.target.getAttribute('data-book-id');
+
+    if (!id) return;
+
+    if (e.target.classList.contains('deleteButton')) {
+      handleDelete(id);
+    }
+
+    if (e.target.classList.contains('isReadOrNot')) {
+      handleToggle(id);
+    }
+  });
+}
+
+function handleDelete(id) {
+  const bookID = id;
+
+  // we want to find the bookID, in our library. Once done, we return the value, then splice it.
+  let bookIndex = myLibrary.findIndex((book) => book.id === bookID);
+  console.log(`Book index: ${bookIndex}`);
+
+  //splice it
+  if (bookIndex > -1) {
+    myLibrary.splice(bookIndex, 1);
+  }
+
+  // renderLibrary
+  renderLibrary();
+}
+
+function handleToggle(id) {
+  const book = myLibrary.find((book) => book.id === id);
+  book.toggleStatus();
+  renderLibrary();
 }
 
 start();
